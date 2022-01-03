@@ -156,6 +156,7 @@ struct Labels: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack {
+                Color.clear
                 ForEach(self.labels.indices) { idx in
                     Text("\(self.labels[idx])")
                         .offset(CGPoint(angle: .degrees(360 * Double(idx)/Double(self.labels.count) - 90), distance: proxy.size.width/2).size)
@@ -196,8 +197,8 @@ struct Clock: View {
         ZStack {
             Ticks(majorTicks: 60, subdivisions: 4)
             Labels(labels: [60] + stride(from: 5, through: 55, by: 5))
-                .padding(40)
-                .font(.title)
+                .padding(30)
+                .font(.headline)
             ZStack {
                 Ticks(majorTicks: 30, subdivisions: 2, majorHeight: 10)
                 Labels(labels: [30] + stride(from: 5, through: 25, by: 5))
@@ -211,10 +212,10 @@ struct Clock: View {
             Text(time.formatted)
                 .font(Font.system(size: 24, weight: .regular).monospacedDigit())
                 .offset(y: 70)
-            if lapTime != nil {
+            if let l = lapTime {
                 Pointer()
                     .stroke(Color.blue, lineWidth: 2)
-                    .rotationEffect(Angle.degrees(Double(lapTime!) * 360/60))
+                    .rotationEffect(Angle.degrees(Double(l) * 360/60))
             }
             Pointer()
                 .stroke(Color.orange, lineWidth: 2)
