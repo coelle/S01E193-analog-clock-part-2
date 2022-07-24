@@ -160,8 +160,8 @@ struct Labels: View {
                     Text("\(self.labels[idx])")
                         .offset(CGPoint(angle: .degrees(360 * Double(idx)/Double(self.labels.count) - 90), distance: proxy.size.width/2).size)
                 }
-            }
-        }
+			}.frame(width: proxy.size.width, height: proxy.size.height)
+		}
     }
 }
 
